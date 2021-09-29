@@ -19,9 +19,10 @@
             </div>
             <div class="button-options">
                 <div id="button-comment"> <p></p></div>
-                <button type="button clear" id="clear-left"><i class="arrow left"> </i>  Clear</button>
-                <button type="button clear" id="format"><i class="arrow right">  </i>    Format  <i class="arrow right"></i></button>
-                <button type="button clear" id="clear-right" disabled>Clear  <i class="arrow right"></i></button>
+                <button type="button clear" id="clear-left" onclick="clearOutput(id)"><i class="arrow left"> </i>  Clear</button>
+                <button type="button clear" id="format" onclick="formatDates(id)"><i class="arrow right"></i>     Format Dates  <i class="arrow right"></i></button>
+                <button type="button clear" id="clear-right" onclick="clearOutput(id)" disabled>Clear  <i class="arrow right"></i></button>
+                <button type="button clear" id="clear-all" onclick="clearOutput(id)" disabled><i class="arrow left"> </i> Clear All  <i class="arrow right"></i></button>
             </div>
             <div class="output-section">
                 <textarea rows="20" cols="50" id="output" placeholder="Output: YYYYMMDD" readonly></textarea>

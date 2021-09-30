@@ -1,9 +1,8 @@
 
-//take dates in M/D/YYYY format and convert to YYYYMMDD
-function formatDates() {
+function formatDates(format) {
     
-    document.querySelector('#output').textContent = "";
-    let originalDatesList = document.querySelector('#input').value;
+    document.querySelector("#output").textContent = "";
+    let originalDatesList = document.querySelector("#input").value;
     let newDatesList = "";
     // console.log("originalDatesList: " + "\n" + originalDatesList + " and the length is: " + originalDatesList.length);
 
@@ -13,23 +12,53 @@ function formatDates() {
     //construct date for each item in the list
     sortedDatesList.forEach(date => {
 
-        //set variables for M D YYYY
-        let sortedMonth = date.split("/")[0];
-        let sortedDay = date.split("/")[1];
-        let sortedYear = date.split("/")[2];
-        // console.log("Date: " + date + " sortedMonth: " + sortedMonth + " sortedDay: " + sortedDay + " sortedYear " + sortedYear)
+        let constructedDate = "";
+        let sortedMonth = "";
+        let sortedDay = "";
+        let sortedYear = "";
 
-        // check to see if 0's need to be applied for MM or DD
-        if(sortedMonth.length < 2) {
-            sortedMonth = 0 + sortedMonth;
-        }
-        if(sortedDay.length < 2) {
-            sortedDay = 0 + sortedDay;
+        if(format === "formatMDY") {
+
+            //set variables for M D YYYY
+            sortedMonth = date.split("/")[0];
+            sortedDay = date.split("/")[1];
+            sortedYear = date.split("/")[2];
+            // console.log("Date: " + date + " sortedMonth: " + sortedMonth + " sortedDay: " + sortedDay + " sortedYear " + sortedYear)
+
+            // check to see if 0's need to be applied for MM or DD
+            if(sortedMonth.length < 2) {
+                sortedMonth = 0 + sortedMonth;
+            }
+            if(sortedDay.length < 2) {
+                sortedDay = 0 + sortedDay;
+            }
+
+            //construct output date in YYYYMMDD format
+            constructedDate = sortedYear + sortedMonth + sortedDay;
+            // console.log("Date in YYYYMMDD format: " + constructedDate);
         }
 
-        //construct output date in YYYYMMDD format
-        let constructedDate = sortedYear + sortedMonth + sortedDay;
-        // console.log("Date in YYYYMMDD format: " + constructedDate);
+        if(format === "formatYMD") {
+            //validate that it is 8 characters
+            // if(format.length > 8) {
+            //     return 'not a valid number of characters for date';
+            // }
+
+            //set variables for YYYY MM DD with substring
+            sortedMonth = date.substring(4,6);
+            sortedDay = date.substring(6,8);
+            sortedYear = date.substring(0,4);
+
+            if(sortedMonth.startsWith(0,0)) {
+                sortedMonth = sortedMonth.substring(1,2);
+            }
+
+            if(sortedDay.startsWith(0,0)) {
+                sortedDay = sortedDay.substring(1,2);
+            }
+
+            constructedDate = sortedMonth + '/' + sortedDay + '/' + sortedYear;
+        }
 
         //add date validation
         // let proposedDate = new Date(sortedYear,sortedMonth - 1,sortedDay - 1);
